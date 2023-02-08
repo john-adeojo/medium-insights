@@ -1,0 +1,27 @@
+# Here you can define all your data sets by using simple YAML syntax.
+#
+# Documentation for this file format can be found in "The Data Catalog"
+# Link: https://kedro.readthedocs.io/en/stable/data/data_catalog.html
+
+requested_date_range:
+  type: pandas.CSVDataSet
+  filepath: data/01_raw/requested_date_range.csv
+
+article_content:
+  type: json.JSONDataSet
+  filepath: data\03_primary\article_content.json
+
+analysis_df:
+  type: pandas.CSVDataSet
+  filepath: data\03_primary\analysis_df.csv
+
+
+full_analysis:
+  type: pandas.CSVDataSet
+  filepath: data\04_feature\full_analysis.csv
+
+
+clusters_plot:
+  type: plotly.JSONDataSet
+  filepath: data/08_reporting/clusters_plot.json
+

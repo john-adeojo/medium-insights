@@ -1,0 +1,35 @@
+black~=22.0
+flake8>=3.7.9, <5.0
+ipython>=7.31.1, <8.0
+isort~=5.0
+jupyter~=1.0
+jupyterlab_server>=2.11.1, <2.16.0
+jupyterlab~=3.0
+kedro~=0.18.4
+kedro-telemetry~=0.2.0
+nbstripout~=0.4
+pytest-cov~=3.0
+pytest-mock>=1.7.1, <2.0
+pytest~=6.2
+
+# additional packages 
+pandas==1.5.3
+numpy==1.21.2
+streamlit==1.17.0
+plotly==5.9.0
+requests==2.28.1
+pymc==5.0.2
+arviz==0.14.0
+scipy==1.9.3
+sentence-transformers==2.2.2
+umap-learn==0.5.3
+hdbscan==0.8.29
+matplotlib==3.6.3
+scikit-learn~=1.0
+ydata-profiling==4.0.0
+kedro[plotly.PlotlyDataSet, plotly.JSONDataSet]==0.18.4
+kedro-viz
+
+# addtional dependencies
+pyqt5<5.13
+pyqtwebengine<5.13
