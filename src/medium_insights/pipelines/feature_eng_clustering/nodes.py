@@ -14,12 +14,15 @@ import matplotlib.pyplot as plt
 from sklearn.feature_extraction.text import CountVectorizer
 
 
-def feature_engineering(analysis_df):
+def feature_engineering(analysis_df, data_request_date):
+    
+    print("Data request date", data_request_date)
+    
     analysis_df = analysis_df.loc[analysis_df.claps > 0]
     analysis_df['last_modified_at'] = pd.to_datetime(analysis_df['last_modified_at'], format='%Y-%m-%d %H:%M:%S')
     analysis_df['published_at'] = pd.to_datetime(analysis_df['published_at'], format='%Y-%m-%d %H:%M:%S')
-    analysis_df['Data Pull Date'] = pd.to_datetime('2023-02-05 10:00:00')
-    analysis_df['No. of Days Published'] = (analysis_df['Data Pull Date'] - analysis_df['published_at']).dt.days
+    analysis_df['Data Pull Date'] = pd.to_datetime(data_request_date)
+    analysis_df['No. of Days Published'] = (analysis_df['Data Pull Date'] - analysis_df['published_at']).dt.days + 2  # hack to remove 0 and -1 days.
     analysis_df['Follower Adjusted Claps per Day'] = analysis_df["Follower Adjusted Claps"] /  analysis_df["No. of Days Published"]
 
     # Adjusted claps are normalised to 1 week and 500 followers. The number of followers I have at the time of coding.
@@ -48,7 +51,7 @@ def reduce_dimensions(embeddings):
 
     n_components = 5
     n_neighbors = 15
-    min_cluster_size = 12
+    min_cluster_size = 2
 
     umap_embeddings = umap.UMAP(n_neighbors=n_neighbors, 
                                 n_components=n_components, 

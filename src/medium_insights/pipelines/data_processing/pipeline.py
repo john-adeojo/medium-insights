@@ -13,7 +13,7 @@ def create_pipeline(**kwargs) -> Pipeline:
             node(
                 func= request_data,
                 inputs= "requested_date_range",
-                outputs=["analysis_df", "article_content"],
+                outputs=["analysis_df", "article_content", "data_request_date"],
                 name="request_data_node"
             )
         ]

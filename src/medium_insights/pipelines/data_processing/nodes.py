@@ -10,7 +10,7 @@ import json
 import requests
 import pandas as pd
 import itertools 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 
 
 def request_data(requested_date_range):
@@ -158,33 +158,12 @@ def request_data(requested_date_range):
     analysis_df = article_metadata_df.merge(author_df, how="left", left_on="Author ID", right_on="Author ID")
     analysis_df["Follower Adjusted Claps"] = analysis_df["claps"] /analysis_df["followers_count"]
 
-    # Article: Content 
-    #article_content_df = pd.DataFrame(article_content)
+    data_request_date = date.today()
     
-    #Export to drive 
+    print("Data request date", data_request_date)
+
     
-    #currentDateTime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    
-#     daterange = start_date + "-" + end_date
-#     print(daterange)
-
-
-#     def save_df_to_csv(df, dir_path, file_name):
-#         file_path = dir_path + '/' + filekedro_name + '.csv'
-#         df.to_csv(file_path, index=False)
-#         print(f'Data frame saved to {file_path}.')
-
-
-#     dir_path = r'C:\Users\johna\OneDrive\Documents\Medium Articles\Article DataBase'
-#     save_df_to_csv(df=analysis_df, dir_path=dir_path, file_name="analysis_data_test")
-
-#     # r'C:\Users\johna\OneDrive\Documents\Medium Articles\Article DataBase\article_content_test.json'
-#     with open(r'C:\Users\johna\anaconda3\envs\medium-environment\medium-insights\data\03_primary\article_content_test.json', 'w') as f:
-#         json.dump(article_content, f)
-    
- 
-    # testing the return
-    return analysis_df, article_content
+    return analysis_df, article_content, data_request_date
 
  
 

@@ -15,13 +15,53 @@ analysis_df:
   type: pandas.CSVDataSet
   filepath: data\03_primary\analysis_df.csv
 
-
 full_analysis:
   type: pandas.CSVDataSet
   filepath: data\04_feature\full_analysis.csv
-
 
 clusters_plot:
   type: plotly.JSONDataSet
   filepath: data/08_reporting/clusters_plot.json
 
+prior_plot_sigma:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/prior_plot_sigma.png
+  versioned: true
+
+prior_plot_mu:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/prior_plot_mu.png
+  versioned: true
+
+model_diagnostics_trace:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/model_diagnostics_trace.png
+  versioned: true
+
+model_diagnostics_summary:
+  type: pandas.CSVDataSet
+  filepath: data/08_reporting/model_diagnostics_summary.csv
+
+model_diagnostics_mcse:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/model_diagnostics_mcse.png
+  versioned: true
+
+model_diagnostics_ess:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/model_diagnostics_ess.png
+  versioned: true
+
+model_diagnostics_rank:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/model_diagnostics_rank.png
+  versioned: true
+
+ppc_plot_loo_pit:
+  type: matplotlib.MatplotlibWriter
+  filepath: data/08_reporting/ppc_plot_loo_pit.png
+  versioned: true
+
+df_final_analysis:
+  type: pandas.CSVDataSet
+  filepath: data/07_model_output/df_final_analysis.csv

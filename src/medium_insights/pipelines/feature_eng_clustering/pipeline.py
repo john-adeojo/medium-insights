@@ -11,7 +11,7 @@ def create_pipeline(**kwargs) -> Pipeline:
         [
             node(
                 func= feature_engineering,
-                inputs= "analysis_df",
+                inputs= ["analysis_df","data_request_date"],
                 outputs="analysis_df2",
                 name="feature_engineering"
             ), 
