@@ -118,7 +118,8 @@ if __name__ == "__main__":
             fig = px.pie(
                 values=[topic[1] for topic in topics],
                 names=[topic[0] for topic in topics],
-                title=f"Clap Score: {row['Clap Score']}"
+                title=f"Clap Score: {row['Clap Score']}",
+                hole=.5
             )
             return fig
 
@@ -181,7 +182,17 @@ if __name__ == "__main__":
 
             st.text(''' Feature engineering complete
                     ''')
-            
+     
+    
+        # display chart 
+        cluster_chart = ja_pipeline.JAPipelineRun()
+        HDSCAN_cluster_data = cluster_chart.get_data("HDSCAN_cluster_data")
+        fig = px.scatter(HDSCAN_cluster_data, x='x', y='y', color='topic', color_continuous_scale='Viridis', width=800, height=800)
+        fig.show()
+    
+    
+    
+    
     
     # Initiate analytics 
     if st.button("Generate Topic Analysis"):

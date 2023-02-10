@@ -99,13 +99,13 @@ def visualise_clusters(embeddings, cluster, parameters: dict):
                           metric='cosine').fit_transform(embeddings)
 
     # Assign UMAP dimensions to data frame 
-    HDBSCAN_clutser_UMAP2D_df = pd.DataFrame(umap_data, columns=['x', 'y'])
-    HDBSCAN_clutser_UMAP2D_df['topic'] = cluster.labels_
+    HDSCAN_cluster_data = pd.DataFrame(umap_data, columns=['x', 'y'])
+    HDSCAN_cluster_data['topic'] = cluster.labels_
 
     # Visualise 2D clusters
-    fig = px.scatter(HDBSCAN_clutser_UMAP2D_df, x='x', y='y', color='topic', color_continuous_scale='Viridis', width=800, height=800)
+    fig = px.scatter(HDSCAN_cluster_data, x='x', y='y', color='topic', color_continuous_scale='Viridis', width=800, height=800)
     
-    return fig
+    return fig, HDSCAN_cluster_data
     
     
 

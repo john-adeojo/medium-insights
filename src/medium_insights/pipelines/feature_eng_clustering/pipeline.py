@@ -36,7 +36,7 @@ def create_pipeline(**kwargs) -> Pipeline:
             node(
                 func= visualise_clusters,
                 inputs= ["embeddings", "cluster", "parameters"],
-                outputs= "clusters_plot",
+                outputs= ["clusters_plot","HDSCAN_cluster_data"],
                 name="visualise_clusters"
             ),
             node(

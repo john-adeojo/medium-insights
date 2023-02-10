@@ -3,6 +3,10 @@
 # Documentation for this file format can be found in "The Data Catalog"
 # Link: https://kedro.readthedocs.io/en/stable/data/data_catalog.html
 
+HDSCAN_cluster_data:
+  type: pandas.CSVDataSet
+  filepath: data/07_model_output/HDSCAN_cluster_data.csv
+
 data_request_date:
   type: pandas.CSVDataSet
   filepath: data/01_raw/data_request_date.csv
