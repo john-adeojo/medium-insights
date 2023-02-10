@@ -3,9 +3,9 @@
 # Documentation for this file format can be found in "The Data Catalog"
 # Link: https://kedro.readthedocs.io/en/stable/data/data_catalog.html
 
-requested_date_range:
+data_request_date:
   type: pandas.CSVDataSet
-  filepath: data/01_raw/requested_date_range.csv
+  filepath: data/01_raw/data_request_date.csv
 
 article_content:
   type: json.JSONDataSet

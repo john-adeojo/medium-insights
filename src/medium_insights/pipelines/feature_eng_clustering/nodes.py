@@ -16,7 +16,10 @@ from sklearn.feature_extraction.text import CountVectorizer
 
 def feature_engineering(analysis_df, data_request_date):
     
+    data_request_date = data_request_date.at[0, 'data_request_date']
+  
     print("Data request date", data_request_date)
+    
     
     analysis_df = analysis_df.loc[analysis_df.claps > 0]
     analysis_df['last_modified_at'] = pd.to_datetime(analysis_df['last_modified_at'], format='%Y-%m-%d %H:%M:%S')
@@ -44,14 +47,14 @@ def create_embeddings (analysis_df2):
     embeddings = model.encode(titles_df, show_progress_bar=True)
     return embeddings 
 
-def reduce_dimensions(embeddings): 
+def reduce_dimensions(embeddings, parameters: dict): 
 
     def generate_integer_list(n):
         return list(range(1, n+1))
 
-    n_components = 5
-    n_neighbors = 15
-    min_cluster_size = 2
+    n_components = parameters["n_components"]
+    n_neighbors = parameters["n_neighbors"]
+    min_cluster_size = parameters["min_cluster_size"]
 
     umap_embeddings = umap.UMAP(n_neighbors=n_neighbors, 
                                 n_components=n_components, 
@@ -62,10 +65,13 @@ def reduce_dimensions(embeddings):
     components_list = generate_integer_list(n_components)
     umap_embeddings_df = pd.DataFrame(umap_embeddings, columns=components_list)
     
-    return umap_embeddings, n_components, min_cluster_size, n_neighbors
+    return umap_embeddings
     
     
-def cluster_HDBSCAN(umap_embeddings, min_cluster_size, analysis_df2):
+def cluster_HDBSCAN(umap_embeddings, analysis_df2, parameters: dict):
+    
+    min_cluster_size = parameters["min_cluster_size"]
+    
     cluster = hdbscan.HDBSCAN(min_cluster_size=min_cluster_size,
                           metric='euclidean',                      
                           cluster_selection_method='eom').fit(umap_embeddings)
@@ -79,7 +85,11 @@ def cluster_HDBSCAN(umap_embeddings, min_cluster_size, analysis_df2):
 
 
 # node to visualise clusters
-def visualise_clusters(embeddings, cluster, n_neighbors):
+def visualise_clusters(embeddings, cluster, parameters: dict):
+    
+    n_neighbors = parameters["n_neighbors"]
+    
+    
     # Cluster into the 2D space for plotting using embeddings.
     umap_data = umap.UMAP(n_neighbors=n_neighbors, 
                           n_components=2, 

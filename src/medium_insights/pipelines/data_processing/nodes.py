@@ -13,10 +13,12 @@ import itertools
 from datetime import datetime, timedelta, date
 
 
-def request_data(requested_date_range):
+def request_data(parameters: dict):
     
-    start_date = requested_date_range.start_date.astype(str)
-    end_date = requested_date_range.end_date.astype(str)
+    #start_date = requested_date_range.start_date.astype(str)
+    #end_date = requested_date_range.end_date.astype(str)
+    start_date = parameters["start_date"]
+    end_date = parameters["end_date"]
     
     def remove_none(lst):
         return [x for x in lst if x is not None]
@@ -41,7 +43,7 @@ def request_data(requested_date_range):
             current_date += timedelta(days=1)
         return query_strings
 
-    query_string_list = generate_query_strings(start_date='2023-03-02', end_date='2023-03-02')
+    query_string_list = generate_query_strings(start_date=start_date, end_date=start_date)
 
     print("total count list:", len(query_string_list))
     print("date pull requests", query_string_list)
@@ -160,7 +162,9 @@ def request_data(requested_date_range):
 
     data_request_date = date.today()
     
-    print("Data request date", data_request_date)
+    data_request_date = pd.DataFrame({'data_request_date': [data_request_date]})
+    
+    #print("Data request date", data_request_date)
 
     
     return analysis_df, article_content, data_request_date

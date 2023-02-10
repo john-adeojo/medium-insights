@@ -11,7 +11,7 @@ def create_pipeline(**kwargs) -> Pipeline:
         [
             node(
                 func= feature_engineering,
-                inputs= ["analysis_df","data_request_date"],
+                inputs= ["analysis_df", 'data_request_date'], 
                 outputs="analysis_df2",
                 name="feature_engineering"
             ), 
@@ -23,19 +23,19 @@ def create_pipeline(**kwargs) -> Pipeline:
             ), 
             node(
                 func= reduce_dimensions,
-                inputs= "embeddings",
-                outputs=["umap_embeddings", "n_components", "min_cluster_size", "n_neighbors"],
+                inputs= ["embeddings", "parameters"],
+                outputs="umap_embeddings",
                 name="reduce_dimensions"
             ),
             node(
                 func= cluster_HDBSCAN,
-                inputs= ["umap_embeddings", "min_cluster_size", "analysis_df2"],
+                inputs= ["umap_embeddings", "analysis_df2", "parameters"],
                 outputs=["cluster", "full_analysis_df"],
                 name="cluster_HDBSCAN"
             ), 
             node(
                 func= visualise_clusters,
-                inputs= ["embeddings", "cluster", "n_neighbors"],
+                inputs= ["embeddings", "cluster", "parameters"],
                 outputs= "clusters_plot",
                 name="visualise_clusters"
             ),
