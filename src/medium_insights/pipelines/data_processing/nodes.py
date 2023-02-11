@@ -43,7 +43,7 @@ def request_data(parameters: dict):
             current_date += timedelta(days=1)
         return query_strings
 
-    query_string_list = generate_query_strings(start_date=start_date, end_date=start_date)
+    query_string_list = generate_query_strings(start_date=start_date, end_date=end_date)
 
     print("total count list:", len(query_string_list))
     print("date pull requests", query_string_list)

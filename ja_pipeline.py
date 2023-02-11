@@ -131,6 +131,7 @@ if __name__ == "__main__":
 
             
     # set parameters
+    
     extract_params = ja_pipeline.JAPipelineRun()
     extract_params.set_data_extraction_param(
         start_date="2023-02-10", 
@@ -153,6 +154,16 @@ if __name__ == "__main__":
             st.text("Please enter some dates")
 
         else:
+            
+            extract_params = ja_pipeline.JAPipelineRun()
+            extract_params.set_data_extraction_param(
+                start_date=start_date, 
+                end_date=end_date,
+                n_components=5,
+                min_cluster_size=15,
+                n_neighbors=15
+            )
+            
             extract_data = ja_pipeline.JAPipelineRun()
             extract_data.end2end_run("data_processing")
 
@@ -177,6 +188,17 @@ if __name__ == "__main__":
             st.text("Please make sure model parameters are integers >= 0")
 
         else:
+            
+            extract_params = ja_pipeline.JAPipelineRun()
+            extract_params.set_data_extraction_param(
+                start_date=start_date, 
+                end_date=end_date,
+                n_components=n_components,
+                min_cluster_size=min_cluster_size,
+                n_neighbors=n_neighbors
+            )
+            
+            
             feature_eng = ja_pipeline.JAPipelineRun()
             feature_eng.end2end_run("feature_enginering_clustering")
 
@@ -188,9 +210,7 @@ if __name__ == "__main__":
         cluster_chart = ja_pipeline.JAPipelineRun()
         HDSCAN_cluster_data = cluster_chart.get_data("HDSCAN_cluster_data")
         fig = px.scatter(HDSCAN_cluster_data, x='x', y='y', color='topic', color_continuous_scale='Viridis', width=800, height=800)
-        fig.show()
-    
-    
+        st.plotly_chart(fig)
     
     
     
