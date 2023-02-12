@@ -20,7 +20,7 @@ from scipy.stats import mstats
 
 def bayesian_inference(full_analysis):
         
-    df = full_analysis.head(20)
+    df = full_analysis.loc[full_analysis["topic"] != -1]
     
     df["topic"] = df["topic"].astype("category")
 
@@ -48,7 +48,7 @@ def bayesian_inference(full_analysis):
     print("1. start sampling")
 
     with model:
-        trace = pm.sample(draws=10, tune=3000, target_accept=0.95, cores=4, idata_kwargs={"log_likelihood": True}, return_inferencedata=False)
+        trace = pm.sample(draws=10000, tune=3000, target_accept=0.95, cores=4, idata_kwargs={"log_likelihood": True}, return_inferencedata=False)
         
     with model:
         posterior_predictive  = pm.sample_posterior_predictive(trace=trace, 
