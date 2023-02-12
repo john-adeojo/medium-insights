@@ -15,6 +15,10 @@ from datetime import datetime, timedelta, date
 
 def request_data(parameters: dict):
     
+    
+    apikey = parameters["XRapidAPIKey"]
+    
+    
     #start_date = requested_date_range.start_date.astype(str)
     #end_date = requested_date_range.end_date.astype(str)
     start_date = parameters["start_date"]
@@ -60,7 +64,7 @@ def request_data(parameters: dict):
         querystring = query
 
         headers = {
-            "X-RapidAPI-Key": "154b04f735msh95207f233e150b4p160e64jsnbede5ac2c0cc",
+            "X-RapidAPI-Key": apikey,
             "X-RapidAPI-Host": "medium2.p.rapidapi.com"
         }
 
@@ -90,7 +94,7 @@ def request_data(parameters: dict):
         url = "https://medium2.p.rapidapi.com/article/" + article
 
         headers = {
-            "X-RapidAPI-Key": "154b04f735msh95207f233e150b4p160e64jsnbede5ac2c0cc",
+            "X-RapidAPI-Key": apikey,
             "X-RapidAPI-Host": "medium2.p.rapidapi.com"
         }
 
@@ -121,7 +125,7 @@ def request_data(parameters: dict):
         url = "https://medium2.p.rapidapi.com/user/" +  author_id
 
         headers = {
-            "X-RapidAPI-Key": "154b04f735msh95207f233e150b4p160e64jsnbede5ac2c0cc",
+            "X-RapidAPI-Key": apikey,
             "X-RapidAPI-Host": "medium2.p.rapidapi.com"
         }
 
@@ -138,7 +142,7 @@ def request_data(parameters: dict):
         url = "https://medium2.p.rapidapi.com/article/" + article + "/content"
 
         headers = {
-            "X-RapidAPI-Key": "154b04f735msh95207f233e150b4p160e64jsnbede5ac2c0cc",
+            "X-RapidAPI-Key": apikey,
             "X-RapidAPI-Host": "medium2.p.rapidapi.com"
         }
 

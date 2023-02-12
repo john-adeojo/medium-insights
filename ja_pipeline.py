@@ -59,7 +59,8 @@ class JAPipelineRun:
         end_date: str,
         n_components: int,
         min_cluster_size: int,
-        n_neighbors: int
+        n_neighbors: int,
+        XRapidAPIKey: str
     ):
         
         directory = os.getcwd()
@@ -72,7 +73,8 @@ class JAPipelineRun:
                 "end_date": end_date,
                 "n_components": n_components,
                 "min_cluster_size": min_cluster_size,
-                "n_neighbors": n_neighbors
+                "n_neighbors": n_neighbors,
+                "XRapidAPIKey": XRapidAPIKey
                 
             }, f
             )
@@ -94,8 +96,8 @@ if __name__ == "__main__":
     import ast
     import matplotlib.pyplot as plt
     from datetime import date
+    #from ydata_profiling import ProfileReport
 
-    
     
     # Messaging for model refresh 
     def model_refresh_message():
@@ -138,7 +140,8 @@ if __name__ == "__main__":
         end_date="2023-02-10",
         n_components=5,
         min_cluster_size=15,
-        n_neighbors=15
+        n_neighbors=15,
+        XRapidAPIKey='XXXXXXXXXXXXXXXX'
     )
 
     
@@ -146,12 +149,13 @@ if __name__ == "__main__":
     st.header("Pull data from medium API")
     start_date = st.text_input('Date Pull: Start YYYY-MM-DD', value='2023-02-10')
     end_date = st.text_input('Date Pull: End YYYY-MM-DD', value='2023-02-10')   
+    XRapidAPIKey = st.text_input('Enter your Medium API secret key', value='XXXXXXXXXXXXXXXX')
     
     # Initiate data pull from medium API
     if st.button("Pull Data"):
 
-        if start_date == "" or end_date == "":
-            st.text("Please enter some dates")
+        if start_date == "" or end_date == "" or XRapidAPIKey == 'XXXXXXXXXXXXXXXX' or XRapidAPIKey == "":
+            st.text("Please enter some dates or a valid Medium API secret key")
 
         else:
             
@@ -161,7 +165,8 @@ if __name__ == "__main__":
                 end_date=end_date,
                 n_components=5,
                 min_cluster_size=15,
-                n_neighbors=15
+                n_neighbors=15,
+                XRapidAPIKey=XRapidAPIKey
             )
             
             extract_data = ja_pipeline.JAPipelineRun()
@@ -195,7 +200,8 @@ if __name__ == "__main__":
                 end_date=end_date,
                 n_components=n_components,
                 min_cluster_size=min_cluster_size,
-                n_neighbors=n_neighbors
+                n_neighbors=n_neighbors,
+                XRapidAPIKey=XRapidAPIKey
             )
             
             

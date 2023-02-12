@@ -21,6 +21,11 @@ from scipy.stats import mstats
 def bayesian_inference(full_analysis):
         
     df = full_analysis.loc[full_analysis["topic"] != -1]
+                           
+    #df = df.sample(frac=0.05, weights='topic', random_state=12)
+    
+    print(df.shape)
+    
     
     df["topic"] = df["topic"].astype("category")
 
