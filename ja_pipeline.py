@@ -46,7 +46,7 @@ class JAPipelineRun:
             key = dataset
             context = session_start.load_context()
             kedro_connector = context.catalog.datasets.__dict__[key]
-            
+                        
         df = kedro_connector.load()
         
         return df
@@ -64,8 +64,8 @@ class JAPipelineRun:
     ):
         
         directory = os.getcwd()
-        path = directory + ".\conf\local\parameters.yml"
-        print(path)
+        path = directory + "/conf/local/parameters.yml"
+        print("this is the path for the yaml file", path)
         with open(path, 'w') as f:
             yaml.dump(
             {
@@ -85,7 +85,7 @@ if __name__ == "__main__":
     if os.getenv("MULTIPROCESSING_SPAWN_DISABLE"):
         import multiprocessing
         multiprocessing.set_start_method("forkserver", force=True)
-    #ja_pipeline = JAPipelineRun()
+#     #ja_pipeline = JAPipelineRun()
     
     import streamlit as st
     import plotly.express as px
@@ -110,7 +110,8 @@ if __name__ == "__main__":
     def topic_analysis(df):
         df = df
         df_summary = df[["topic", "Clap Score", "Generated Topics"]].groupby(["topic", "Generated Topics"]).agg({"Clap Score": "median"}).reset_index()
-        df_summary["Clap Score"] = df_summary["Clap Score"].round()
+        df_summary["Clap Score"] = df_summary["Clap Score"].round(decimals=2)
+        df_summary.sort_values(by="Clap Score", ascending=False, inplace=True)
 
 
         st.title("Medium Article Topic Analysis")

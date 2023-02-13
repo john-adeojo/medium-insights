@@ -13,15 +13,15 @@ data_request_date:
 
 article_content:
   type: json.JSONDataSet
-  filepath: data\03_primary\article_content.json
+  filepath: data/03_primary/article_content.json
 
 analysis_df:
   type: pandas.CSVDataSet
-  filepath: data\03_primary\analysis_df.csv
+  filepath: data/03_primary/analysis_df.csv
 
 full_analysis:
   type: pandas.CSVDataSet
-  filepath: data\04_feature\full_analysis.csv
+  filepath: data/04_feature/full_analysis.csv
 
 clusters_plot:
   type: plotly.JSONDataSet
