@@ -97,7 +97,6 @@ if __name__ == "__main__":
     import matplotlib.pyplot as plt
     from datetime import date
     #from ydata_profiling import ProfileReport
-
     
     # Messaging for model refresh 
     def model_refresh_message():
@@ -130,6 +129,7 @@ if __name__ == "__main__":
 
         for i, row in df_plot.iterrows():
             st.plotly_chart(plot_pie_chart(row))
+            
 
 
             
@@ -152,6 +152,12 @@ if __name__ == "__main__":
     end_date = st.text_input('Date Pull: End YYYY-MM-DD', value='2023-02-10')   
     XRapidAPIKey = st.text_input('Enter your Medium API secret key', value='XXXXXXXXXXXXXXXX')
     
+    # Data requested date
+    getdata = ja_pipeline.JAPipelineRun()
+    data_request_date_df = getdata.get_data("data_request_date")
+    request_date = data_request_date_df.iloc[0,0]
+    st.text(f"Data last requested on {request_date}")
+        
     # Initiate data pull from medium API
     if st.button("Pull Data"):
 
@@ -179,21 +185,24 @@ if __name__ == "__main__":
             
 
     # set clustering parameters UMAP and HDBSCAN
-    st.header("UMAP dimension reduction parameters")
+    st.header("UMAP Dimension Reduction Parameters")
     n_components = st.number_input(label='Number of Components', value=5)
-    n_neighbors = st.number_input(label='Nearest Neighbours', value=15)
+    n_neighbors = st.number_input(label='Nearest Neighbours', value=60)
     
     # Set modeling
-    st.header("HDBSCAN parameters")
-    min_cluster_size = st.number_input(label='Minimum Cluster Size', value=15)
+    st.header("HDBSCAN Clustering Parameters")
+    min_cluster_size = st.number_input(label='Minimum Cluster Size', value=60)
     
-    # initiate model run after data pull
-    if st.button("Run model"):
+    # Run clustering a dimensionality reduction
+    if st.button("Run Clustering Model"):
 
         if n_components <= 0 or min_cluster_size <= 0 or n_neighbors <= 0:
             st.text("Please make sure model parameters are integers >= 0")
 
         else:
+            
+            text = "Generating your topics...please be patient"
+            st.text(text)
             
             extract_params = ja_pipeline.JAPipelineRun()
             extract_params.set_data_extraction_param(
@@ -221,12 +230,17 @@ if __name__ == "__main__":
     
     
     
-    # Initiate analytics 
+    # Generate analytics  
     if st.button("Generate Topic Analysis"):
-
+        
+        text = "Generating your analysis...this could take up to 10 minutes"
+        st.text(text)
         # runs bayes analysis and saves new data set to data repo in kedro data\07_model_output
         run_bayes_analysis = ja_pipeline.JAPipelineRun()
         run_bayes_analysis.end2end_run("bayesian_analysis_pipeline")
+        
+        text = "Thanks for being patient the Bayesian analysis in now complete...hold on for your results"
+        st.text(text)
 
         # Pull data from kedro data storage 
         getdata = ja_pipeline.JAPipelineRun()

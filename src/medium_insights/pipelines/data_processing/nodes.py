@@ -18,9 +18,6 @@ def request_data(parameters: dict):
     
     apikey = parameters["XRapidAPIKey"]
     
-    
-    #start_date = requested_date_range.start_date.astype(str)
-    #end_date = requested_date_range.end_date.astype(str)
     start_date = parameters["start_date"]
     end_date = parameters["end_date"]
     
@@ -168,8 +165,6 @@ def request_data(parameters: dict):
     
     data_request_date = pd.DataFrame({'data_request_date': [data_request_date]})
     
-    #print("Data request date", data_request_date)
-
     
     return analysis_df, article_content, data_request_date
 

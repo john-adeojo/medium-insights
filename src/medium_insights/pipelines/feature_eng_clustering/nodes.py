@@ -41,6 +41,9 @@ def feature_engineering(analysis_df, data_request_date):
 
 def create_embeddings (analysis_df2):
     from sentence_transformers import SentenceTransformer
+    
+    
+    
     titles_df = list(analysis_df2.title)
     model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
 
