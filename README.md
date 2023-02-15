@@ -1,4 +1,4 @@
-# medium insights
+# Medium Insights (WIP)
 
 ## Project Overview 
 
